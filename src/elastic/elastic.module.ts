@@ -1,14 +1,15 @@
 import { Module } from '@nestjs/common';
 import { ElasticService } from './elastic.service';
 import { ElasticsearchModule } from '@nestjs/elasticsearch';
-
+import { ConfigModule } from '@nestjs/config';
 @Module({
   imports: [
+    ConfigModule.forRoot(),
     ElasticsearchModule.register({
-      node: 'https://my-dep.es.us-central1.gcp.cloud.es.io',
+      node: process.env.ELASTIC_NODE,
       auth: {
-        username: 'elastic',
-        password: 'uD87oBFg8Jdw2r10zfc2MwmP',
+        username: process.env.ELASTIC_AUTH_USERNAME,
+        password: process.env.ELASTIC_AUTH_PASSWORD,
       },
     }),
   ],

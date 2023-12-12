@@ -5,9 +5,16 @@ import { FactoryModule } from './factory/factory.module';
 import { DatabaseModule } from './database/database.module';
 import { ElasticModule } from './elastic/elastic.module';
 import { UserModule } from './user/user.module';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
-  imports: [FactoryModule, DatabaseModule, ElasticModule, UserModule],
+  imports: [
+    ConfigModule.forRoot(),
+    FactoryModule,
+    DatabaseModule,
+    ElasticModule,
+    UserModule,
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
