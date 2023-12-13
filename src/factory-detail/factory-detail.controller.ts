@@ -7,13 +7,16 @@ import {
   Delete,
   Put,
   UseFilters,
+  UseGuards,
 } from '@nestjs/common';
 import { FactoryDetailService } from './factory-detail.service';
 import { CreateFactoryDetailDto } from './dto/create-factory-detail.dto';
 import { UpdateFactoryDetailDto } from './dto/update-factory-detail.dto';
 import { CustomExceptionFilter } from 'src/custom-exception-filter/custom-exception-filter';
+import { AuthGuard } from 'src/auth/auth.guard';
 @Controller('factory-detail')
 @UseFilters(new CustomExceptionFilter())
+@UseGuards(AuthGuard)
 export class FactoryDetailController {
   constructor(private readonly factoryDetailService: FactoryDetailService) {}
 

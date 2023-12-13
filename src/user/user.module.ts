@@ -7,5 +7,6 @@ import { ElasticModule } from 'src/elastic/elastic.module';
   controllers: [UserController],
   providers: [UserService],
   imports: [ElasticModule],
+  exports: [UserService],
 })
 export class UserModule {}

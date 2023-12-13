@@ -2,16 +2,18 @@ import { Injectable } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { ElasticService } from 'src/elastic/elastic.service';
+import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class UserService {
   constructor(private readonly elasticService: ElasticService) {}
   async create(createUserDto: CreateUserDto) {
+    const hashedPwd = await bcrypt.hash(createUserDto.password, 10);
     const user = {
       createTime: Date.now(),
       ...createUserDto,
+      password: hashedPwd,
     };
-
     return await this.elasticService.create('users', user);
   }
 
@@ -36,5 +38,14 @@ export class UserService {
 
   async remove(id: string) {
     return await this.elasticService.delete('users', id);
+  }
+  async getbyEmail(email: string) {
+    const result = await this.elasticService.search('users', {
+      match: { email: email },
+    });
+    const response = result.hits.hits.filter(
+      (item) => item._source.email === email,
+    );
+    return response[0];
   }
 }

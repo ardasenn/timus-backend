@@ -7,6 +7,7 @@ import { ElasticModule } from './elastic/elastic.module';
 import { UserModule } from './user/user.module';
 import { ConfigModule } from '@nestjs/config';
 import { FactoryDetailModule } from './factory-detail/factory-detail.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { FactoryDetailModule } from './factory-detail/factory-detail.module';
     ElasticModule,
     UserModule,
     FactoryDetailModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],
