@@ -21,11 +21,11 @@ export class AuthService {
 
     const payload = { id: user._id, email: user._source.email };
     const accessToken = jwt.sign(payload, process.env.JWT_SECRET, {
-      expiresIn: '5s',
+      expiresIn: '60m',
     });
 
     const refreshToken = jwt.sign(payload, process.env.JWT_REFRESH_SECRET, {
-      expiresIn: '3m',
+      expiresIn: '1d',
     });
     this.setCookie(response, 'refreshToken', refreshToken);
 

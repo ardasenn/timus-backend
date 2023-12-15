@@ -7,15 +7,14 @@ import {
   Param,
   Delete,
   UseGuards,
-  UseFilters,
 } from '@nestjs/common';
 import { FactoryService } from './factory.service';
 import { CreateFactoryDto } from './dto/create-factory.dto';
 import { UpdateFactoryDto } from './dto/update-factory.dto';
 import { AuthGuard } from 'src/auth/auth.guard';
-import { CustomExceptionFilter } from 'src/custom-exception-filter/custom-exception-filter';
+import { InsertColumnFactoryDto } from './dto/insert-column-factory.dto';
+
 @UseGuards(AuthGuard)
-@UseFilters(new CustomExceptionFilter())
 @Controller('factory')
 export class FactoryController {
   constructor(private readonly factoryService: FactoryService) {}
@@ -46,5 +45,9 @@ export class FactoryController {
   @Delete(':id')
   async remove(@Param('id') id: string) {
     return this.factoryService.remove(+id);
+  }
+  @Post('/insert')
+  insertColumn(@Body() insertColumnFactoryDto: InsertColumnFactoryDto) {
+    return this.factoryService.addColumn(insertColumnFactoryDto);
   }
 }

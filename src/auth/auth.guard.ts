@@ -47,7 +47,7 @@ export class AuthGuard implements CanActivate {
       const accessToken = jwt.sign(
         { id: payload['id'], email: payload['email'] },
         process.env.JWT_SECRET,
-        { expiresIn: '1m' },
+        { expiresIn: '60m' },
       );
 
       response.cookie('accessToken', accessToken, {

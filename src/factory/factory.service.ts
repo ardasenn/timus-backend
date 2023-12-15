@@ -3,6 +3,7 @@ import { CreateFactoryDto } from './dto/create-factory.dto';
 import { UpdateFactoryDto } from './dto/update-factory.dto';
 import { DatabaseService } from 'src/database/database.service';
 import { Status } from 'src/enums/status.enum';
+import { InsertColumnFactoryDto } from './dto/insert-column-factory.dto';
 
 @Injectable()
 export class FactoryService {
@@ -66,5 +67,10 @@ export class FactoryService {
       [Status.PASSIVE, id],
     );
     return response.rows;
+  }
+  async addColumn(insertColumnFactoryDto: InsertColumnFactoryDto) {
+    return await this.databaseService.query(
+      `ALTER TABLE "Factory" ADD COLUMN ${insertColumnFactoryDto.name} ${insertColumnFactoryDto.dataType};`,
+    );
   }
 }

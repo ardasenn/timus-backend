@@ -7,16 +7,13 @@ import {
   Param,
   Delete,
   UseGuards,
-  UseFilters,
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { AuthGuard } from 'src/auth/auth.guard';
-import { CustomExceptionFilter } from 'src/custom-exception-filter/custom-exception-filter';
 
 @Controller('user')
-@UseFilters(new CustomExceptionFilter())
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
