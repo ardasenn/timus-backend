@@ -1,4 +1,4 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { UserService } from 'src/user/user.service';
 import { LoginDto } from './dto/login.dto';
 import * as bcrypt from 'bcrypt';
@@ -16,7 +16,7 @@ export class AuthService {
     );
 
     if (!match) {
-      throw new UnauthorizedException();
+      throw new NotFoundException('Email or password is wrong');
     }
 
     const payload = { id: user._id, email: user._source.email };

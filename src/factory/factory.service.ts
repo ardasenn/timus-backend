@@ -12,7 +12,7 @@ export class FactoryService {
     const now = new Date();
     const { name, subscription, endOfSubscription, employeeCount, isFree } =
       createFactoryDto;
-    return await this.databaseService.query(
+    const response = await this.databaseService.query(
       'INSERT INTO "Factory" (name, subscription, "endOfSubscription", "employeeCount", "isFree", "createdAt","updatedAt", status) VALUES($1, $2, $3, $4, $5, $6,  $7,$8) RETURNING *',
       [
         name,
@@ -25,6 +25,7 @@ export class FactoryService {
         Status.ACTIVE,
       ],
     );
+    return response.rowCount > 0 ? 'created' : 'some thing went wrong';
   }
 
   async findAll() {
@@ -46,7 +47,8 @@ export class FactoryService {
     const now = new Date();
     const { name, subscription, endOfSubscription, employeeCount, isFree } =
       updateFactoryDto;
-    return await this.databaseService.query(
+
+    const response = await this.databaseService.query(
       'UPDATE "Factory" SET name=$1 ,  subscription=$2 , "endOfSubscription"=$3, "employeeCount"=$4, "isFree"=$5,"updatedAt"=$6, status=$7 where id=$8',
       [
         name,
@@ -59,6 +61,7 @@ export class FactoryService {
         id,
       ],
     );
+    return response.rowCount > 0 ? 'uptaded' : 'some thing went wrong';
   }
 
   async remove(id: number) {

@@ -13,7 +13,7 @@ export class FactoryDetailService {
     const now = new Date();
     const { department, dateRange, kw, price, isDiscount, factoryId } =
       createFactoryDetailDto;
-    return await this.databaseService.query(
+    const response = await this.databaseService.query(
       'INSERT INTO "FactoryDetail" (department, "dateRange", kw, price, "isDiscount", "factoryId","createdAt","updatedAt", status) VALUES($1, $2, $3, $4, $5, $6,  $7,$8,$9) RETURNING *',
       [
         department,
@@ -27,6 +27,7 @@ export class FactoryDetailService {
         Status.ACTIVE,
       ],
     );
+    return response.rowCount > 0 ? 'created' : 'some thing went wrong';
   }
 
   async findAll() {
@@ -48,7 +49,7 @@ export class FactoryDetailService {
     const now = new Date();
     const { department, dateRange, kw, price, isDiscount, factoryId } =
       updateFactoryDetailDto;
-    return await this.databaseService.query(
+    const response = await this.databaseService.query(
       'UPDATE "FactoryDetail" SET department=$1 , "dateRange"=$2, kw=$3, price=$4, "isDiscount"=$5, "factoryId"=$6,"updatedAt"=$7, status=$8 where id=$9',
       [
         department,
@@ -62,6 +63,7 @@ export class FactoryDetailService {
         id,
       ],
     );
+    return response.rowCount > 0 ? 'uptaded' : 'some thing went wrong';
   }
 
   async remove(id: number) {
