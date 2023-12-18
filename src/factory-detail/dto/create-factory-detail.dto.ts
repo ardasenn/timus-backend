@@ -1,7 +1,8 @@
-import { IsDateString, Min } from 'class-validator';
+import { IsDateString, IsString, MaxLength, Min } from 'class-validator';
 export class CreateFactoryDetailDto {
-  @IsDateString()
-  department: Date;
+  @IsString()
+  @MaxLength(200)
+  department: string;
   @IsDateString()
   dateRange: Date;
   @Min(0)

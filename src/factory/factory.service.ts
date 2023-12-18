@@ -13,7 +13,7 @@ export class FactoryService {
     const { name, subscription, endOfSubscription, employeeCount, isFree } =
       createFactoryDto;
     const response = await this.databaseService.query(
-      'INSERT INTO "Factory" (name, subscription, "endOfSubscription", "employeeCount", "isFree", "createdAt","updatedAt", status) VALUES($1, $2, $3, $4, $5, $6,  $7,$8) RETURNING *',
+      'INSERT INTO "factory" (name, subscription, "endofSubscription", "employeecount", "isfree", "createdat","updatedat", status) VALUES($1, $2, $3, $4, $5, $6,  $7,$8) RETURNING *',
       [
         name,
         subscription,
@@ -30,14 +30,14 @@ export class FactoryService {
 
   async findAll() {
     const response = await this.databaseService.query(
-      `Select * from "Factory" where  status != 'PASSIVE' `,
+      `Select * from "factory" where  status != 'PASSIVE' `,
     );
     return response.rows;
   }
 
   async findOne(id: number) {
     const response = await this.databaseService.query(
-      `Select * from "Factory" where id=$1 and status != 'PASSIVE'`,
+      `Select * from "factory" where id=$1 and status != 'PASSIVE'`,
       [id],
     );
     return response.rows;
@@ -49,7 +49,7 @@ export class FactoryService {
       updateFactoryDto;
 
     const response = await this.databaseService.query(
-      'UPDATE "Factory" SET name=$1 ,  subscription=$2 , "endOfSubscription"=$3, "employeeCount"=$4, "isFree"=$5,"updatedAt"=$6, status=$7 where id=$8',
+      'UPDATE "factory" SET name=$1 ,  subscription=$2 , "endofsubscription"=$3, "employeecount"=$4, "isfree"=$5,"updatedat"=$6, status=$7 where id=$8',
       [
         name,
         subscription,
@@ -66,14 +66,14 @@ export class FactoryService {
 
   async remove(id: number) {
     const response = await this.databaseService.query(
-      'UPDATE "Factory" SET status=$1 where id=$2',
+      'UPDATE "factory" SET status=$1 where id=$2',
       [Status.PASSIVE, id],
     );
     return response.rows;
   }
   async addColumn(insertColumnFactoryDto: InsertColumnFactoryDto) {
     return await this.databaseService.query(
-      `ALTER TABLE "Factory" ADD COLUMN ${insertColumnFactoryDto.name} ${insertColumnFactoryDto.dataType};`,
+      `ALTER TABLE "factory" ADD COLUMN ${insertColumnFactoryDto.name} ${insertColumnFactoryDto.dataType};`,
     );
   }
 }

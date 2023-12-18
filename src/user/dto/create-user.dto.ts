@@ -15,9 +15,9 @@ export class CreateUserDto {
     message: 'name should not contain numeric characters',
   })
   name: string;
-  @Matches(/^(?=.*[A-Z\d]).{8,}$/, {
+  @Matches(/^(?=.*[A-Z])(?=.*\d).{8,}$/, {
     message:
-      'Password should not contain numeric characters and should have 8 charecters',
+      'Password should  contain numeric and alphabetic characters and should have 8 charecters',
   })
   password: string;
   @IsEnum(Role)

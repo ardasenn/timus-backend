@@ -14,7 +14,7 @@ export class FactoryDetailService {
     const { department, dateRange, kw, price, isDiscount, factoryId } =
       createFactoryDetailDto;
     const response = await this.databaseService.query(
-      'INSERT INTO "FactoryDetail" (department, "dateRange", kw, price, "isDiscount", "factoryId","createdAt","updatedAt", status) VALUES($1, $2, $3, $4, $5, $6,  $7,$8,$9) RETURNING *',
+      'INSERT INTO "factorydetail" (department, "daterange", kw, price, "isdiscount", "factoryid","createdat","updatedat", status) VALUES($1, $2, $3, $4, $5, $6,  $7,$8,$9) RETURNING *',
       [
         department,
         dateRange,
@@ -32,14 +32,14 @@ export class FactoryDetailService {
 
   async findAll() {
     const response = await this.databaseService.query(
-      `Select * from "FactoryDetail" where  status != 'PASSIVE' `,
+      `Select * from "factorydetail" where  status != 'PASSIVE' `,
     );
     return response.rows;
   }
 
   async findOne(id: number) {
     const response = await this.databaseService.query(
-      `Select * from "FactoryDetail" where id=$1 and status != 'PASSIVE'`,
+      `Select * from "factorydetail" where id=$1 and status != 'PASSIVE'`,
       [id],
     );
     return response.rows;
@@ -50,7 +50,7 @@ export class FactoryDetailService {
     const { department, dateRange, kw, price, isDiscount, factoryId } =
       updateFactoryDetailDto;
     const response = await this.databaseService.query(
-      'UPDATE "FactoryDetail" SET department=$1 , "dateRange"=$2, kw=$3, price=$4, "isDiscount"=$5, "factoryId"=$6,"updatedAt"=$7, status=$8 where id=$9',
+      'UPDATE "factorydetail" SET department=$1 , "daterange"=$2, kw=$3, price=$4, "isdiscount"=$5, "factoryid"=$6,"updatedat"=$7, status=$8 where id=$9',
       [
         department,
         dateRange,
@@ -68,7 +68,7 @@ export class FactoryDetailService {
 
   async remove(id: number) {
     const response = await this.databaseService.query(
-      'UPDATE "FactoryDetail" SET status=$1 where id=$2',
+      'UPDATE "factorydetail" SET status=$1 where id=$2',
       [Status.PASSIVE, id],
     );
     return response.rows;
@@ -76,7 +76,7 @@ export class FactoryDetailService {
 
   async addColumn(insertColumnDetailDto: InsertColumnDetailDto) {
     return await this.databaseService.query(
-      `ALTER TABLE "FactoryDetail" ADD COLUMN ${insertColumnDetailDto.name} ${insertColumnDetailDto.dataType};`,
+      `ALTER TABLE "factorydetail" ADD COLUMN ${insertColumnDetailDto.name} ${insertColumnDetailDto.dataType};`,
     );
   }
 }

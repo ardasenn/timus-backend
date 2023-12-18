@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { ElasticService } from 'src/elastic/elastic.service';
@@ -8,6 +8,9 @@ import * as bcrypt from 'bcrypt';
 export class UserService {
   constructor(private readonly elasticService: ElasticService) {}
   async create(createUserDto: CreateUserDto) {
+    const isEmailUsed = await this.getbyEmail(createUserDto.email);
+    console.log(isEmailUsed, 'email');
+    if (isEmailUsed) throw new UnauthorizedException('Email is already taken');
     const hashedPwd = await bcrypt.hash(createUserDto.password, 10);
     const user = {
       createTime: Date.now(),
