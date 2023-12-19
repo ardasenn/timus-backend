@@ -32,6 +32,7 @@ export class AuthService {
     return {
       status: 'ok',
       accessToken,
+      user,
     };
   }
   private setCookie(response: Response, name: string, value: string): void {
