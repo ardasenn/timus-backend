@@ -1,4 +1,10 @@
-import { IsDateString, IsString, MaxLength, Min } from 'class-validator';
+import {
+  IsDateString,
+  IsNotEmpty,
+  IsString,
+  MaxLength,
+  Min,
+} from 'class-validator';
 export class CreateFactoryDetailDto {
   @IsString()
   @MaxLength(200)
@@ -9,6 +15,7 @@ export class CreateFactoryDetailDto {
   kw: number;
   @Min(0)
   price: number;
+  @IsNotEmpty()
   isDiscount: boolean;
   @Min(0)
   factoryId: number;

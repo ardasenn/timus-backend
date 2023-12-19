@@ -31,6 +31,10 @@ export class FactoryDetailController {
   findOne(@Param('id') id: string) {
     return this.factoryDetailService.findOne(+id);
   }
+  @Get('/factory/:id')
+  findeDetailsByFactoryId(@Param('id') id: string) {
+    return this.factoryDetailService.findDetailsbyFactoryId(+id);
+  }
 
   @Put(':id')
   update(

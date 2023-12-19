@@ -79,4 +79,11 @@ export class FactoryDetailService {
       `ALTER TABLE "factorydetail" ADD COLUMN ${insertColumnDetailDto.name} ${insertColumnDetailDto.dataType};`,
     );
   }
+  async findDetailsbyFactoryId(id: number) {
+    const response = await this.databaseService.query(
+      `Select * from "factorydetail" where factoryid=$1 and status != 'PASSIVE'`,
+      [id],
+    );
+    return response.rows;
+  }
 }

@@ -13,7 +13,7 @@ export class FactoryService {
     const { name, subscription, endOfSubscription, employeeCount, isFree } =
       createFactoryDto;
     const response = await this.databaseService.query(
-      'INSERT INTO "factory" (name, subscription, "endofSubscription", "employeecount", "isfree", "createdat","updatedat", status) VALUES($1, $2, $3, $4, $5, $6,  $7,$8) RETURNING *',
+      'INSERT INTO "factory" (name, subscription, "endofsubscription", "employeecount", "isfree", "createdat","updatedat", status) VALUES($1, $2, $3, $4, $5, $6,  $7,$8) RETURNING *',
       [
         name,
         subscription,

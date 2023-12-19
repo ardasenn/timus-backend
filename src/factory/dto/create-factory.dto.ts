@@ -17,5 +17,6 @@ export class CreateFactoryDto {
   name: string;
   @Min(0)
   employeeCount: number;
+  @IsNotEmpty()
   isFree: boolean;
 }
