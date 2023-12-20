@@ -1,3 +1,31 @@
+
+# Hi everyone! I’ve developed this project in Timus Fullstack Bootcamp 😊
+
+This project is part one of the Timus final case. You can check the frontend with this link: [Frontend Repo](https://github.com/ardasenn/timus-frontend).
+
+### Here are the URLs for my final project:
+### [Website](https://timus-frontend-ardasenns-projects.vercel.app/)
+### [API](https://timus-backend.onrender.com)
+
+## Before you start, make sure to add your .env file. I am going to provide a sample .env file template below. After that, you’ll need to install the necessary Node modules.
+
+## What I Learned from This Project:
+- Nest.js
+- Vue.js
+- Elastic Search
+- PostgreSQL
+
+
+#### Sample .env file content
+DATABASE_URL= your text
+ELASTIC_NODE=your text
+ELASTIC_AUTH_USERNAME="your text
+ELASTIC_AUTH_PASSWORD="your text
+JWT_SECRET=your text
+JWT_REFRESH_SECRET=your text
+PORT=3000
+
+
 <p align="center">
   <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
 </p>
